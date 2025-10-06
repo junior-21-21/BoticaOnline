@@ -1,0 +1,39 @@
+@page
+@model BoticaOnline.Web.Pages.Prescripciones.SubirModel
+@{
+    ViewData["Title"] = "Subir Prescripción Médica";
+}
+
+<h1 class="display-4">@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">Archivo de Receta</div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="ArchivoPrescripcion" class="form-label">Seleccionar Archivo (JPG, PNG o PDF)</label>
+                        <input asp-for="ArchivoPrescripcion" type="file" class="form-control" required />
+                        <span asp-validation-for="ArchivoPrescripcion" class="text-danger"></span>
+                    </div>
+
+                    <p class="text-muted small">
+                        Nota: La prescripción será marcada como "Pendiente" hasta su revisión.
+                    </p>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-upload"></i> Subir y Registrar
+                    </button>
+                    <a asp-page="./Listado" class="btn btn-secondary ms-2">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Botica Online - Gestión</title>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BoticaOnline.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+        /* Estilo personalizado para un look más profesional */
+        :root {
+            --primary-color: #007bff; /* Azul primario */
+            --secondary-color: #6c757d; /* Gris secundario */
+            --dark-color: #343a40; /* Navbar oscuro */
+            --light-bg: #f8f9fa; /* Fondo claro */
+        }
+
+        .navbar-custom {
+            background-color: var(--dark-color) !important;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #ffffff !important; /* Texto blanco */
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: var(--primary-color) !important; /* Azul en hover */
+        }
+        
+        .navbar-custom .nav-link i {
+            margin-right: 5px;
+        }
+
+        .footer-custom {
+            background-color: var(--dark-color);
+            color: var(--secondary-color);
+            padding: 1rem 0;
+        }
+        
+        .footer-custom a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark navbar-custom box-shadow mb-4 fixed-top">
+            <div class="container">
+                <a class="navbar-brand animate__animated animate__fadeInLeft" asp-area="" asp-page="/Index">
+                    <i class="fas fa-prescription-bottle-alt"></i> **Botica Online**
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Index">
+                                <i class="fas fa-home"></i> Inicio
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Pedidos/Listado">
+                                <i class="fas fa-shopping-cart"></i> Pedidos
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Prescripciones/Listado">
+                                <i class="fas fa-file-medical"></i> Prescripciones
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Productos/Listado">
+                                <i class="fas fa-boxes"></i> Inventario
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Clientes/Listado">
+                                <i class="fas fa-users"></i> Clientes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container" style="padding-top: 80px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer-custom mt-5">
+        <div class="container text-center">
+            &copy; 2025 - Botica Online - Todos los derechos reservados.
+            <br />
+            <small>Diseñado y Desarrollado por **Junior Quicaño**</small>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

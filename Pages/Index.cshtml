@@ -1,0 +1,103 @@
+@page
+@model BoticaOnline.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard Principal";
+}
+
+<style>
+    /* Estilos para las tarjetas del Dashboard */
+    .dashboard-card {
+        transition: all 0.3s ease-in-out;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px); /* Pequeña animación de elevación */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body-link {
+        display: block;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card-body-link h3 {
+        transition: color 0.3s ease-in-out;
+    }
+
+    .dashboard-card:hover .card-body-link h3 {
+        color: var(--bs-primary); /* Cambia el color del título al hacer hover */
+    }
+    
+    .icon-large {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="text-center mb-5 animate__animated animate__fadeInDown">
+        <h1 class="display-3 text-primary fw-bold">@Model.MensajeBienvenida</h1>
+        <p class="lead mt-3 text-muted">Accede rápidamente a las funciones de gestión de la Botica Online.</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        
+        <div class="col animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+            <div class="card dashboard-card bg-light border-info">
+                <a asp-page="/Pedidos/Listado" class="card-body-link">
+                    <div class="text-center text-info">
+                        <i class="fas fa-shopping-cart icon-large"></i>
+                        <h3 class="card-title mt-3">Órdenes y Pedidos</h3>
+                        <p class="card-text text-muted">Revisa, actualiza el estado y crea nuevos pedidos para clientes.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="col animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+            <div class="card dashboard-card bg-light border-warning">
+                <a asp-page="/Prescripciones/Listado" class="card-body-link">
+                    <div class="text-center text-warning">
+                        <i class="fas fa-file-medical icon-large"></i>
+                        <h3 class="card-title mt-3">Validación de Recetas</h3>
+                        <p class="card-text text-muted">Procesa y valida las prescripciones médicas subidas por los clientes.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+            <div class="card dashboard-card bg-light border-success">
+                <a asp-page="/Productos/Listado" class="card-body-link">
+                    <div class="text-center text-success">
+                        <i class="fas fa-boxes icon-large"></i>
+                        <h3 class="card-title mt-3">Inventario y Productos</h3>
+                        <p class="card-text text-muted">Gestiona el stock, precios y categorías de todos los productos.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+            <div class="card dashboard-card bg-light border-primary">
+                <a asp-page="/Clientes/Listado" class="card-body-link">
+                    <div class="text-center text-primary">
+                        <i class="fas fa-users icon-large"></i>
+                        <h3 class="card-title mt-3">Gestión de Clientes</h3>
+                        <p class="card-text text-muted">Administra el registro y la información de contacto de todos los clientes.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="text-center mt-5 pt-3">
+        <p class="text-muted fst-italic">Recuerda que estas funcionalidades también están disponibles en el menú de navegación principal.</p>
+    </div>
+</div>

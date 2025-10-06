@@ -1,0 +1,81 @@
+@page
+@model BoticaOnline.Web.Pages.Prescripciones.ListadoModel
+@{
+    ViewData["Title"] = "Gestión de Prescripciones";
+}
+
+<h1 class="display-4">@ViewData["Title"]</h1>
+<hr />
+
+<p>
+    <a asp-page="./Subir" class="btn btn-success">
+        <i class="fas fa-upload"></i> Subir Nueva Prescripción
+    </a>
+</p>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table table-striped table-hover mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha Subida</th>
+            <th>Revisión</th>
+            <th>Cliente</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Prescripciones)
+        {
+            string estadoClass = item.EstadoValidacion switch
+            {
+                "Aprobada" => "bg-success",
+                "Rechazada" => "bg-danger",
+                _ => "bg-warning" // Pendiente
+            };
+
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FechaSubida.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@(item.FechaRevision.HasValue ? item.FechaRevision.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                <td>
+                    @(item.Cliente != null ? $"{item.Cliente.NombreCompleto}" : "N/A")
+                </td>
+                <td>
+                    <span class="badge @estadoClass text-white">@item.EstadoValidacion</span>
+                </td>
+                <td>
+                    <a href="@item.RutaArchivo" target="_blank" class="btn btn-sm btn-info" title="Ver Archivo">
+                        <i class="fas fa-eye"></i> Ver
+                    </a>
+
+                    @if (item.EstadoValidacion == "Pendiente")
+                    {
+                        <form method="post" asp-page-handler="Validar" class="d-inline">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="hidden" name="NuevoEstado" value="Aprobada" />
+                            <button type="submit" class="btn btn-sm btn-success" 
+                                    onclick="return confirm('¿Confirmar APROBACIÓN de prescripción #@item.Id?');">
+                                <i class="fas fa-check"></i> Aprobar
+                            </button>
+                        </form>
+
+                        <form method="post" asp-page-handler="Validar" class="d-inline">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <input type="hidden" name="NuevoEstado" value="Rechazada" />
+                            <button type="submit" class="btn btn-sm btn-danger" 
+                                    onclick="return confirm('¿Confirmar RECHAZO de prescripción #@item.Id?');">
+                                <i class="fas fa-times"></i> Rechazar
+                            </button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
